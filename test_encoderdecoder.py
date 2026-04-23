@@ -1,6 +1,6 @@
 import unittest
 
-from morse_magic_stage1 import encode_to_morse, decode_from_morse
+from encoder_decoder import encode_to_morse, decode_from_morse
 
 
 class TestMorseMagicStage1(unittest.TestCase):
