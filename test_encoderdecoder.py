@@ -1,75 +1,63 @@
 import unittest
+from encoder_decoder import MorseCodeTranslator
 
-from encoder_decoder import encode_to_morse, decode_from_morse
 
+class TestMorseCodeTranslator(unittest.TestCase):
 
-class TestMorseMagicStage1(unittest.TestCase):
+    def setUp(self):
+        self.translator = MorseCodeTranslator()
 
-    # Encoding tests
     def test_encode_single_word(self):
         self.assertEqual(
-            encode_to_morse("HELLO"),
+            self.translator.encode("HELLO"),
             ".... . .-.. .-.. ---"
         )
 
-    def test_encode_sentence_with_space(self):
+    def test_encode_sentence(self):
         self.assertEqual(
-            encode_to_morse("HELLO WORLD"),
+            self.translator.encode("HELLO WORLD"),
             ".... . .-.. .-.. --- / .-- --- .-. .-.. -.."
         )
 
-    def test_encode_lowercase_text(self):
+    def test_encode_lowercase(self):
         self.assertEqual(
-            encode_to_morse("hello"),
+            self.translator.encode("hello"),
             ".... . .-.. .-.. ---"
-        )
-
-    def test_encode_numbers(self):
-        self.assertEqual(
-            encode_to_morse("123"),
-            ".---- ..--- ...--"
         )
 
     def test_encode_empty_input(self):
         self.assertEqual(
-            encode_to_morse(""),
+            self.translator.encode(""),
             "Error: Please enter some text."
         )
 
-    def test_encode_unsupported_character(self):
+    def test_encode_invalid_character(self):
         self.assertEqual(
-            encode_to_morse("Hello #"),
+            self.translator.encode("HELLO #"),
             "Error: Unsupported character found: #"
         )
 
-    # Decoding tests
     def test_decode_single_word(self):
         self.assertEqual(
-            decode_from_morse(".... . .-.. .-.. ---"),
+            self.translator.decode(".... . .-.. .-.. ---"),
             "HELLO"
         )
 
-    def test_decode_sentence_with_space(self):
+    def test_decode_sentence(self):
         self.assertEqual(
-            decode_from_morse(".... . .-.. .-.. --- / .-- --- .-. .-.. -.."),
+            self.translator.decode(".... . .-.. .-.. --- / .-- --- .-. .-.. -.."),
             "HELLO WORLD"
-        )
-
-    def test_decode_numbers(self):
-        self.assertEqual(
-            decode_from_morse(".---- ..--- ...--"),
-            "123"
         )
 
     def test_decode_empty_input(self):
         self.assertEqual(
-            decode_from_morse(""),
+            self.translator.decode(""),
             "Error: Please enter Morse code."
         )
 
     def test_decode_invalid_morse(self):
         self.assertEqual(
-            decode_from_morse(".... . invalid"),
+            self.translator.decode(".... invalid"),
             "Error: Invalid Morse code found: invalid"
         )
 

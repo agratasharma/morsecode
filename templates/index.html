@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Morse Magic</title>
+</head>
+<body>
+    <h1>Morse Magic</h1>
+    <p>Encode and decode Morse code.</p>
+
+    <form method="POST">
+        <label for="mode">Choose option:</label>
+        <select name="mode" id="mode">
+            <option value="encode" {% if mode == "encode" %}selected{% endif %}>
+                Encode Text to Morse
+            </option>
+            <option value="decode" {% if mode == "decode" %}selected{% endif %}>
+                Decode Morse to Text
+            </option>
+        </select>
+
+        <br><br>
+
+        <label for="user_input">Enter text or Morse code:</label><br>
+        <textarea name="user_input" id="user_input" rows="5" cols="50">{{ user_input }}</textarea>
+
+        <br><br>
+
+        <button type="submit">Convert</button>
+    </form>
+
+    {% if result %}
+        <h2>Result:</h2>
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+</html>
